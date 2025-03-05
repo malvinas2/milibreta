@@ -1,0 +1,256 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src.controller &mdash; documentación de mi_libreta - 2025-03-03</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=cfc695f8"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/translations.js?v=f85f4cfb"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            mi_libreta
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Instalación y uso</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../main.html">main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../src.html">src package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">mi_libreta</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Código de módulo</a></li>
+      <li class="breadcrumb-item active">src.controller</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Código fuente para src.controller</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">controller.py:</span>
+<span class="sd">    Controlador milibreta App</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s2">&quot;Matthias Bergmann&quot;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s2">&quot;malvinas2@gmx.de&quot;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;Copyright 2025&quot;</span>
+<span class="n">__versión__</span> <span class="o">=</span> <span class="s2">&quot;2025-03-03&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">src</span><span class="w"> </span><span class="kn">import</span> <span class="n">clases</span>
+
+<div class="viewcode-block" id="Controller">
+<a class="viewcode-back" href="../../src.controller.html#src.controller.Controller">[documentos]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Controller</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">view</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">view</span> <span class="o">=</span> <span class="n">view</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">solofichero</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">boton_alta</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">addDataToLbx</span><span class="p">)</span>
+        <span class="c1"># self.view.boton_alta[&quot;command&quot;] = self.addDataToLbx</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">boton_modificar</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">updateDataFromLBX</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">boton_borrar</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">removeDataFromLBX</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">boton_reiniciar</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">clearEntry</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">boton_image</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">abreImagen</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s1">&#39;&lt;&lt;TreeviewSelect&gt;&gt;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">loadDataToEntry</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loadDataToLBX</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Controller.loadDataToLBX">
+<a class="viewcode-back" href="../../src.controller.html#src.controller.Controller.loadDataToLBX">[documentos]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">loadDataToLBX</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">getAllData</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">setListbox</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Controller.addDataToLbx">
+<a class="viewcode-back" href="../../src.controller.html#src.controller.Controller.addDataToLbx">[documentos]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">addDataToLbx</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">addToDB</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loadDataToLBX</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Controller.removeDataFromLBX">
+<a class="viewcode-back" href="../../src.controller.html#src.controller.Controller.removeDataFromLBX">[documentos]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">removeDataFromLBX</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">removeDataFromDB</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clearEntry</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loadDataToLBX</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Controller.updateDataFromLBX">
+<a class="viewcode-back" href="../../src.controller.html#src.controller.Controller.updateDataFromLBX">[documentos]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">updateDataFromLBX</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">updateDB</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loadDataToLBX</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Controller.loadDataToEntry">
+<a class="viewcode-back" href="../../src.controller.html#src.controller.Controller.loadDataToEntry">[documentos]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">loadDataToEntry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># id_ = self.view.getCursorID() or &#39;&#39;</span>
+        <span class="n">id_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">getCursorID</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ID: &quot;</span><span class="p">,</span> <span class="n">id_</span><span class="p">)</span>
+        <span class="c1"># print(&quot;ID: &quot;, id_, &quot;\nNOMBRE: &quot;, nombre, &quot;\nAPELLIDO: &quot;, apellido)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">consultar</span><span class="p">(</span><span class="n">id_</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;data: &quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="n">nombre</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">nombre</span>
+        <span class="n">empresa</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">empresa</span>
+        <span class="n">calle</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">calle</span>
+        <span class="n">cp</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">cp</span>
+        <span class="n">telefono</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">telefono</span>
+        <span class="n">mail</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">mail</span>
+        <span class="n">apellido</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">apellido</span>
+        <span class="n">numero</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">numero</span>
+        <span class="n">ciudad</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">ciudad</span>
+        <span class="n">fax</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">fax</span>
+        <span class="n">solofichero</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">ruta</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">solofichero</span> <span class="o">=</span> <span class="n">solofichero</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">borrarTodo</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">setEntries</span><span class="p">(</span><span class="n">nombre</span><span class="p">,</span> <span class="n">empresa</span><span class="p">,</span> <span class="n">calle</span><span class="p">,</span> <span class="n">cp</span><span class="p">,</span> <span class="n">telefono</span><span class="p">,</span> <span class="n">mail</span><span class="p">,</span> <span class="n">apellido</span><span class="p">,</span> <span class="n">numero</span><span class="p">,</span> <span class="n">ciudad</span><span class="p">,</span> <span class="n">fax</span><span class="p">,</span> <span class="n">solofichero</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Controller.addToDB">
+<a class="viewcode-back" href="../../src.controller.html#src.controller.Controller.addToDB">[documentos]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">addToDB</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">nombre</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">getNombre</span><span class="p">()</span>
+        <span class="n">empresa</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">getEmpresa</span><span class="p">()</span>
+        <span class="n">calle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">getCalle</span><span class="p">()</span>
+        <span class="n">cp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">getCP</span><span class="p">()</span>
+        <span class="n">telefono</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">getTelefono</span><span class="p">()</span>
+        <span class="n">mail</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">getMail</span><span class="p">()</span>
+        <span class="n">apellido</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">getApellido</span><span class="p">()</span>
+        <span class="n">numero</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">getNumero</span><span class="p">()</span>
+        <span class="n">ciudad</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">getCiudad</span><span class="p">()</span>
+        <span class="n">fax</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">getFax</span><span class="p">()</span>
+        <span class="n">id_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">getCursorID</span><span class="p">()</span>
+        <span class="n">solofichero</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solofichero</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">addToTable</span><span class="p">(</span><span class="n">nombre</span><span class="p">,</span> <span class="n">empresa</span><span class="p">,</span> <span class="n">calle</span><span class="p">,</span> <span class="n">cp</span><span class="p">,</span> <span class="n">telefono</span><span class="p">,</span> <span class="n">mail</span><span class="p">,</span> <span class="n">apellido</span><span class="p">,</span> <span class="n">numero</span><span class="p">,</span> <span class="n">ciudad</span><span class="p">,</span> <span class="n">fax</span><span class="p">,</span> <span class="n">solofichero</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">clases</span><span class="o">.</span><span class="n">EmailInvalido</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">showErrorMessage</span><span class="p">(</span><span class="s2">&quot;Mensaje de error&quot;</span><span class="p">,</span> <span class="s2">&quot;La dirección de email no es válida. Por favor corríjala. &quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">clases</span><span class="o">.</span><span class="n">NombreApellidoVacio</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">showErrorMessage</span><span class="p">(</span><span class="s2">&quot;Mensaje de error&quot;</span><span class="p">,</span> <span class="s2">&quot;Los campos de &#39;Nombre&#39; y &#39;Apellido&#39; deben ser completados. Por favor corríjalo. &quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Controller.updateDB">
+<a class="viewcode-back" href="../../src.controller.html#src.controller.Controller.updateDB">[documentos]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">updateDB</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">nombre</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">getNombre</span><span class="p">()</span>
+        <span class="n">empresa</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">getEmpresa</span><span class="p">()</span>
+        <span class="n">calle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">getCalle</span><span class="p">()</span>
+        <span class="n">cp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">getCP</span><span class="p">()</span>
+        <span class="n">telefono</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">getTelefono</span><span class="p">()</span>
+        <span class="n">mail</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">getMail</span><span class="p">()</span>
+        <span class="n">apellido</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">getApellido</span><span class="p">()</span>
+        <span class="n">numero</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">getNumero</span><span class="p">()</span>
+        <span class="n">ciudad</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">getCiudad</span><span class="p">()</span>
+        <span class="n">fax</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">getFax</span><span class="p">()</span>
+        <span class="n">solofichero</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solofichero</span>
+        <span class="n">id_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">getCursorID</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">updateTable</span><span class="p">(</span><span class="n">id_</span><span class="p">,</span> <span class="n">nombre</span><span class="p">,</span> <span class="n">empresa</span><span class="p">,</span> <span class="n">calle</span><span class="p">,</span> <span class="n">cp</span><span class="p">,</span> <span class="n">telefono</span><span class="p">,</span> <span class="n">mail</span><span class="p">,</span> <span class="n">apellido</span><span class="p">,</span> <span class="n">numero</span><span class="p">,</span> <span class="n">ciudad</span><span class="p">,</span> <span class="n">fax</span><span class="p">,</span> <span class="n">solofichero</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">clases</span><span class="o">.</span><span class="n">EmailInvalido</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">showErrorMessage</span><span class="p">(</span><span class="s2">&quot;Mensaje de error&quot;</span><span class="p">,</span> <span class="s2">&quot;La dirección de email no es válida. Por favor corríjala. &quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">clases</span><span class="o">.</span><span class="n">NombreApellidoVacio</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">showErrorMessage</span><span class="p">(</span><span class="s2">&quot;Mensaje de error&quot;</span><span class="p">,</span> <span class="s2">&quot;Los campos de &#39;Nombre&#39; y &#39;Apellido&#39; deben ser completados. Por favor corríjalo. &quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Controller.removeDataFromDB">
+<a class="viewcode-back" href="../../src.controller.html#src.controller.Controller.removeDataFromDB">[documentos]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">removeDataFromDB</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">id_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">getCursorID</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">id_</span><span class="p">:</span>
+            <span class="n">mensaje</span> <span class="o">=</span> <span class="s2">&quot;¿Estás seguro de eliminar la entrada de &quot;</span>
+            <span class="n">mensaje</span> <span class="o">=</span> <span class="n">mensaje</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">getCursorNombre</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">getCursorApellido</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39; ?&#39;</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">preguntaSiNo</span><span class="p">(</span><span class="s2">&quot;Eliminar entrada&quot;</span><span class="p">,</span> <span class="n">mensaje</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">deleteDataFromTable</span><span class="p">(</span><span class="n">id_</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Controller.abreImagen">
+<a class="viewcode-back" href="../../src.controller.html#src.controller.Controller.abreImagen">[documentos]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">abreImagen</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">solofichero</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">fileDialog</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">solofichero</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">muestraImagen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">solofichero</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Controller.clearEntry">
+<a class="viewcode-back" href="../../src.controller.html#src.controller.Controller.clearEntry">[documentos]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">clearEntry</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">solofichero</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">borrarTodo</span><span class="p">()</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2025, Matthias Bergmann.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

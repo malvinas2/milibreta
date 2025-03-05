@@ -1,0 +1,274 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src.model &mdash; documentación de mi_libreta - 2025-03-03</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=cfc695f8"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/translations.js?v=f85f4cfb"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            mi_libreta
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Instalación y uso</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../main.html">main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../src.html">src package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">mi_libreta</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Código de módulo</a></li>
+      <li class="breadcrumb-item active">src.model</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Código fuente para src.model</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">model.py:</span>
+<span class="sd">    modelo milibreta App</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s2">&quot;Matthias Bergmann&quot;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s2">&quot;malvinas2@gmx.de&quot;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;Copyright 2025&quot;</span>
+<span class="n">__versión__</span> <span class="o">=</span> <span class="s2">&quot;2025-03-03&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">peewee</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src</span><span class="w"> </span><span class="kn">import</span> <span class="n">constants</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src</span><span class="w"> </span><span class="kn">import</span> <span class="n">clases</span>
+
+<span class="n">db</span> <span class="o">=</span> <span class="n">peewee</span><span class="o">.</span><span class="n">SqliteDatabase</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">DATABASE_NAME</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="BaseModel">
+<a class="viewcode-back" href="../../src.model.html#src.model.BaseModel">[documentos]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">BaseModel</span><span class="p">(</span><span class="n">peewee</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseModel.Meta">
+<a class="viewcode-back" href="../../src.model.html#src.model.BaseModel.Meta">[documentos]</a>
+    <span class="k">class</span><span class="w"> </span><span class="nc">Meta</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creación Base de Datos.</span>
+
+<span class="sd">        :param db: database.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">database</span> <span class="o">=</span> <span class="n">db</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Libreto">
+<a class="viewcode-back" href="../../src.model.html#src.model.Libreto">[documentos]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Libreto</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creación de tabla: Libreto.</span>
+<span class="sd">    Tipos de datos para cada campo en la tabla.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">peewee</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">(</span><span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">nombre</span> <span class="o">=</span> <span class="n">peewee</span><span class="o">.</span><span class="n">CharField</span><span class="p">()</span>
+    <span class="n">empresa</span> <span class="o">=</span> <span class="n">peewee</span><span class="o">.</span><span class="n">CharField</span><span class="p">()</span>
+    <span class="n">calle</span> <span class="o">=</span> <span class="n">peewee</span><span class="o">.</span><span class="n">CharField</span><span class="p">()</span>
+    <span class="n">cp</span> <span class="o">=</span> <span class="n">peewee</span><span class="o">.</span><span class="n">CharField</span><span class="p">()</span>
+    <span class="n">telefono</span> <span class="o">=</span> <span class="n">peewee</span><span class="o">.</span><span class="n">CharField</span><span class="p">()</span>
+    <span class="n">mail</span> <span class="o">=</span> <span class="n">peewee</span><span class="o">.</span><span class="n">CharField</span><span class="p">()</span>
+    <span class="n">apellido</span> <span class="o">=</span> <span class="n">peewee</span><span class="o">.</span><span class="n">CharField</span><span class="p">()</span>
+    <span class="n">numero</span> <span class="o">=</span> <span class="n">peewee</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">()</span>
+    <span class="n">ciudad</span> <span class="o">=</span> <span class="n">peewee</span><span class="o">.</span><span class="n">CharField</span><span class="p">()</span>
+    <span class="n">fax</span> <span class="o">=</span> <span class="n">peewee</span><span class="o">.</span><span class="n">CharField</span><span class="p">()</span>
+    <span class="n">ruta</span> <span class="o">=</span> <span class="n">peewee</span><span class="o">.</span><span class="n">CharField</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Libreto.Meta">
+<a class="viewcode-back" href="../../src.model.html#src.model.Libreto.Meta">[documentos]</a>
+    <span class="k">class</span><span class="w"> </span><span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">table_name</span> <span class="o">=</span> <span class="s1">&#39;libreto&#39;</span></div>
+</div>
+
+
+
+<span class="n">db</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">create_tables</span><span class="p">([</span><span class="n">Libreto</span><span class="p">])</span>
+<span class="k">except</span> <span class="n">peewee</span><span class="o">.</span><span class="n">OperationalError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tabla ya existe&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Model">
+<a class="viewcode-back" href="../../src.model.html#src.model.Model">[documentos]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Model</span><span class="p">:</span>
+
+    <span class="c1"># ##############################################</span>
+    <span class="c1"># MODELO ABMC</span>
+    <span class="c1"># ##############################################</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<div class="viewcode-block" id="Model.isValid">
+<a class="viewcode-back" href="../../src.model.html#src.model.Model.isValid">[documentos]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">isValid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">regex</span><span class="p">,</span> <span class="n">entry</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="n">regex</span><span class="p">,</span> <span class="n">entry</span><span class="p">)</span> <span class="ow">or</span> <span class="n">entry</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="Model.consultar">
+<a class="viewcode-back" href="../../src.model.html#src.model.Model.consultar">[documentos]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">consultar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Método para recuperar los detalles de contacto de la entrada seleccionada de la base de datos</span>
+
+<span class="sd">        :param links: index</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;consultar&quot;</span><span class="p">)</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">Libreto</span><span class="o">.</span><span class="n">select</span><span class="p">()</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">Libreto</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">index</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">query</span></div>
+
+
+<div class="viewcode-block" id="Model.getAllData">
+<a class="viewcode-back" href="../../src.model.html#src.model.Model.getAllData">[documentos]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">getAllData</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Método para obtener todos los nombres de la base de datos.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">resultado</span> <span class="o">=</span> <span class="n">Libreto</span><span class="o">.</span><span class="n">select</span><span class="p">()</span>
+        <span class="c1"># resultado = list(Libreto.select())</span>
+
+        <span class="c1"># query = Libreto.select(Libreto.nombre, Libreto.calle)</span>
+        <span class="c1"># print(query)</span>
+        <span class="c1"># print(query[3].nombre)</span>
+        <span class="c1"># for libreto in query:</span>
+        <span class="c1">#     print(libreto.nombre)</span>
+        <span class="c1"># print(&quot;datenbankinhalt: &quot;)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="n">resultado</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">resultado</span></div>
+
+
+<div class="viewcode-block" id="Model.addToTable">
+<a class="viewcode-back" href="../../src.model.html#src.model.Model.addToTable">[documentos]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">addToTable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nombre</span><span class="p">,</span> <span class="n">empresa</span><span class="p">,</span> <span class="n">calle</span><span class="p">,</span> <span class="n">cp</span><span class="p">,</span> <span class="n">telefono</span><span class="p">,</span> <span class="n">mail</span><span class="p">,</span> <span class="n">apellido</span><span class="p">,</span> <span class="n">numero</span><span class="p">,</span> <span class="n">ciudad</span><span class="p">,</span> <span class="n">fax</span><span class="p">,</span> <span class="n">solofichero</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Método para anadir datos en el registro seleccionado.</span>
+
+<span class="sd">        :param links: id_, nombre, empresa, calle, cp, telefono, mail, apellido, numero, ciudad, fax, solofichero.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isValid</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">REGEX_MAIL</span><span class="p">,</span> <span class="n">mail</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">clases</span><span class="o">.</span><span class="n">EmailInvalido</span><span class="p">(</span><span class="s1">&#39;Email vacio&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">nombre</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span> <span class="ow">or</span> <span class="n">apellido</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">clases</span><span class="o">.</span><span class="n">NombreApellidoVacio</span><span class="p">(</span><span class="s1">&#39;Nobmre vacio&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">nombre</span><span class="p">,</span> <span class="n">empresa</span><span class="p">,</span> <span class="n">calle</span><span class="p">,</span> <span class="n">cp</span><span class="p">,</span> <span class="n">telefono</span><span class="p">,</span> <span class="n">mail</span><span class="p">,</span> <span class="n">apellido</span><span class="p">,</span> <span class="n">numero</span><span class="p">,</span> <span class="n">ciudad</span><span class="p">,</span> <span class="n">fax</span><span class="p">,</span> <span class="n">solofichero</span><span class="p">)</span>
+        <span class="n">nuevo_entrada</span> <span class="o">=</span> <span class="n">Libreto</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">nombre</span><span class="o">=</span><span class="n">nombre</span><span class="p">,</span> <span class="n">empresa</span><span class="o">=</span><span class="n">empresa</span><span class="p">,</span> <span class="n">calle</span><span class="o">=</span><span class="n">calle</span><span class="p">,</span> <span class="n">cp</span><span class="o">=</span><span class="n">cp</span><span class="p">,</span> <span class="n">telefono</span><span class="o">=</span><span class="n">telefono</span><span class="p">,</span> <span class="n">mail</span><span class="o">=</span><span class="n">mail</span><span class="p">,</span> <span class="n">apellido</span><span class="o">=</span><span class="n">apellido</span><span class="p">,</span> <span class="n">numero</span><span class="o">=</span><span class="n">numero</span><span class="p">,</span> <span class="n">ciudad</span><span class="o">=</span><span class="n">ciudad</span><span class="p">,</span> <span class="n">fax</span><span class="o">=</span><span class="n">fax</span><span class="p">,</span> <span class="n">ruta</span><span class="o">=</span><span class="n">solofichero</span><span class="p">)</span>
+        <span class="n">nuevo_entrada</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Estoy en alta todo ok&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Model.updateTable">
+<a class="viewcode-back" href="../../src.model.html#src.model.Model.updateTable">[documentos]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">updateTable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">id_</span><span class="p">,</span> <span class="n">nombre</span><span class="p">,</span> <span class="n">empresa</span><span class="p">,</span> <span class="n">calle</span><span class="p">,</span> <span class="n">cp</span><span class="p">,</span> <span class="n">telefono</span><span class="p">,</span> <span class="n">mail</span><span class="p">,</span> <span class="n">apellido</span><span class="p">,</span> <span class="n">numero</span><span class="p">,</span> <span class="n">ciudad</span><span class="p">,</span> <span class="n">fax</span><span class="p">,</span> <span class="n">solofichero</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Método de modificación de datos en el registro seleccionado.</span>
+
+<span class="sd">        :param links: id_, nombre, empresa, calle, cp, telefono, mail, apellido, numero, ciudad, fax, solofichero.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isValid</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">REGEX_MAIL</span><span class="p">,</span> <span class="n">mail</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">clases</span><span class="o">.</span><span class="n">EmailInvalido</span><span class="p">(</span><span class="s1">&#39;Email vacio&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">nombre</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span> <span class="ow">or</span> <span class="n">apellido</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">clases</span><span class="o">.</span><span class="n">NombreApellidoVacio</span><span class="p">(</span><span class="s1">&#39;Nobmre vacio&#39;</span><span class="p">)</span>
+        <span class="n">actualizar</span> <span class="o">=</span> <span class="n">Libreto</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">nombre</span><span class="o">=</span><span class="n">nombre</span><span class="p">,</span> <span class="n">empresa</span><span class="o">=</span><span class="n">empresa</span><span class="p">,</span> <span class="n">calle</span><span class="o">=</span><span class="n">calle</span><span class="p">,</span> <span class="n">cp</span><span class="o">=</span><span class="n">cp</span><span class="p">,</span> <span class="n">telefono</span><span class="o">=</span><span class="n">telefono</span><span class="p">,</span> <span class="n">mail</span><span class="o">=</span><span class="n">mail</span><span class="p">,</span> <span class="n">apellido</span><span class="o">=</span><span class="n">apellido</span><span class="p">,</span> <span class="n">numero</span><span class="o">=</span><span class="n">numero</span><span class="p">,</span> <span class="n">ciudad</span><span class="o">=</span><span class="n">ciudad</span><span class="p">,</span> <span class="n">fax</span><span class="o">=</span><span class="n">fax</span><span class="p">,</span> <span class="n">ruta</span><span class="o">=</span><span class="n">solofichero</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">Libreto</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">id_</span><span class="p">)</span>
+        <span class="n">actualizar</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Model.deleteDataFromTable">
+<a class="viewcode-back" href="../../src.model.html#src.model.Model.deleteDataFromTable">[documentos]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">deleteDataFromTable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">id_</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Método de eliminación de registros.</span>
+
+<span class="sd">        :param item: id_.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="n">Libreto</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">Libreto</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">id_</span><span class="p">)</span>
+        <span class="n">query</span><span class="o">.</span><span class="n">delete_instance</span><span class="p">()</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2025, Matthias Bergmann.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
